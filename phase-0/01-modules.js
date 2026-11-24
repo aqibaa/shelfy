@@ -16,6 +16,7 @@
 // 1) Built-in module. "node:" prefix batata hai ke yeh Node ka apna hai.
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 // 2) Apni file se named exports. (Yeh file neeche banayi hai: ./lib/money.js)
 import { formatPKR, applyDiscount } from "./lib/money.js";
@@ -34,7 +35,9 @@ inventory.remove("Coke 1.5L", 4);
 console.log(inventory.list());
 
 console.log("\n--- __dirname ESM mein nahi hota; yeh hai uska tarika ---");
-const here = path.dirname(new URL(import.meta.url).pathname);
+// GALAT: new URL(import.meta.url).pathname → Windows par "/N:/..." (extra slash).
+// SAHI:  fileURLToPath() har OS (Windows/Mac/Linux) par theek path deta hai.
+const here = path.dirname(fileURLToPath(import.meta.url));
 console.log("Yeh file is folder mein hai:", here);
 
 // readFile ek Promise deta hai (Lesson 2 mein detail). Abhi bas dekhein:
