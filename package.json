@@ -1,0 +1,13 @@
+{
+  "name": "shelfy",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "p0:modules": "node phase-0/01-modules.js",
+    "p0:async": "node phase-0/02-async.js",
+    "p0:loop": "node phase-0/03-event-loop.js",
+    "p0:http": "node phase-0/04-http.js",
+    "p0:test": "node --test phase-0/"
+  }
+}
